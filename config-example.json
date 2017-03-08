@@ -1,0 +1,75 @@
+{
+  ////////////////////////////////////////////////////////////////////////////
+  // The configuration in this file is normally taken care of by DevPortal  //
+  // However, needs to be provided for running bots locally                 //
+  // NOTE: Replace APPKEY and HOST with your own appkey and Satori endpoint //
+  //       If your bot requires authentication, uncomment and update the    //
+  //       ROLE and ROLE_SECRET fields                                      //
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////
+  // Custom bot configuration object
+  // The keys and values in the custom bot configuration object are user-specific
+  // NOTE: The default log level for a bot ("INFO") can be overridden by
+  //       specifying the desired loglevel under the "logLevel" key in the
+  //       custom bot configuration object, for example:
+  //
+  //       "customConfig": {"logLevel": "DEBUG"}
+  //
+  //       The framework recognizes the standard SLF4J loglevels.
+  ////////////
+  "customConfig": {
+    "outputChannel": "example.out"
+  },
+
+
+  ////////////
+  // The name of the class implementing the bot interface (the entrypoint)
+  ////////////
+  "className": "com.satori.bots.example.MyBot",
+  
+
+  //////////////////////////////////
+  // Subscriber configuration
+  // Configure the channels from which the local bot should be receiving data
+  //////////////////////////////////
+  "subscriberConfigs": {
+    "main": {
+      "appKey": "APPKEY",
+      "host": "HOST",
+      // "role": "ROLE",
+      // "roleSecret": "ROLE_SECRET",
+      "channels": [
+        {
+          "filter": "SELECT * from `example.in`",
+          "subscriptionId": "mySubscription",
+          "period": 1
+        }
+      ]
+    }
+  },
+
+  //////////////////////////////////
+  // Publisher configuration
+  // Specify connection on which BotContext.getRtmProxy().publish() should publish messages
+  //////////////////////////////////
+  "publisherConfig": {
+    "appKey": "APPKEY",
+    "host": "HOST"
+    //"role": "ROLE",
+    //"roleSecret": "ROLE_SECRET"
+  },
+
+  //////////////////////////////////
+  // Every bot has an internal HTTP interface used when running inside Satori
+  // If running two local bots at the same time, give them different httpPorts
+  /////////////
+  "httpPort": 8080,
+
+  ////////////
+  // Other example values
+  ////////////
+  "botInstanceName": "bot-instance",
+  "botInstanceId": "bot-instance-1"
+
+}

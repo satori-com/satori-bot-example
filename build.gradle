@@ -1,0 +1,64 @@
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+    }
+}
+
+plugins {
+    id 'application'
+}
+
+version = '0.1'
+mainClassName = 'com.satori.bots.example.MyBot'
+ext.vars = [
+    botApiVersion:'1.0'
+]
+
+apply plugin: 'com.github.johnrengelman.shadow'
+sourceCompatibility = 1.8
+
+repositories {
+        mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.satori', name:'satori-bots-java-core', version: vars.botApiVersion
+    compile 'org.slf4j:slf4j-api:1.7.24'
+}
+
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
+task botJar(type: ShadowJar) {
+    description = "Create a shadow jar without the framework libraries"
+
+    configurations = [project.configurations.runtime]
+    from(project.sourceSets.main.output)
+
+
+    dependencies {
+        // The following dependencies are available on the bot executor,
+        // avoid packing them to the jar
+        exclude(dependency('com.google.code.gson:gson:2.8.0'))
+        exclude(dependency('com.google.guava:guava:18.0'))
+        exclude(dependency('com.satori:satori-bots-java-core'))
+        exclude(dependency('com.neovisionaries:nv-websocket-client:1.25'))
+        exclude(dependency('commons-io:commons-io:2.5'))
+        exclude(dependency('commons-cli:commons-cli:1.3.1'))
+        exclude(dependency('org.apache.commons:commons-lang3:3.4'))
+        exclude(dependency('org.slf4j:slf4j-api:1.7.24'))
+    }
+
+//  Use relocation if you need to use a package conflicting with the versions available
+//  in the framework
+//  relocate 'com.satori.bots.example', 'shadow.satori.bots.example'
+
+
+    manifest {
+        attributes (
+                'Satori-Bots-Api-Version': vars.botApiVersion,
+                'Satori-Bots-Entry-Point': mainClassName
+        )
+    }
+}
+
