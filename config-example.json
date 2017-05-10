@@ -52,6 +52,8 @@
   //////////////////////////////////
   // Publisher configuration
   // Specify connection on which BotContext.getRtmProxy().publish() should publish messages
+  // The configuration is also used to send metrics and logs over RTM
+  // This field is mandatory
   //////////////////////////////////
   "publisherConfig": {
     "appKey": "APPKEY",
