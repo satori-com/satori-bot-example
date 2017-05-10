@@ -25,6 +25,9 @@ repositories {
 dependencies {
     compile group: 'com.satori', name:'satori-bots-java-core', version: vars.botApiVersion
     compile 'org.slf4j:slf4j-api:1.7.24'
+
+    // see project Readme on how to get this jar file
+    runtime files('execution-framework-public.jar')
 }
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
