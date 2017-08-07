@@ -1,0 +1,86 @@
+ {
+  ////////////////////////////////////////////////////////////////////////////
+  // The configuration in this file is normally taken care of by DevPortal  //
+  // However, needs to be provided for running bots locally                 //
+  // NOTE: Replace APPKEY and HOST with your own appkey and Satori endpoint //
+  //       If your bot requires authentication, uncomment and update the    //
+  //       ROLE and ROLE_SECRET fields                                      //
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////
+  // Custom bot configuration object containing custom configuration parameters.
+  // The keys and values in the custom bot configuration object are user-specific
+  // NOTE: The default log level for a bot ("INFO") can be overridden by
+  //       specifying the desired loglevel under the "logLevel" key in the
+  //       custom bot configuration object, for example:
+  //
+  //       "customConfig": {"logLevel": "DEBUG"}
+  //
+  //       The framework recognizes the standard SLF4J loglevels.
+  ////////////
+  "customConfig": {
+    "outputChannel": "example.out"
+  },
+
+
+  ////////////
+  // The name of the class implementing the streambot interface. 
+  // This serves as the entry point to RTM operations.
+  ////////////
+  "className": "com.satori.bots.example.MyBot",
+  
+  //////////////////////////////////
+  // Publisher configuration
+  // This is only needed if:
+  // 1) you wish to publish to another combination of appKey/host than specified in subscriberConfigs
+  // or
+  // 2) subscriberConfigs' role does not have PUBLISH permission
+  //////////////////////////////////
+  //  "publisherConfig": {
+  //    "appKey": "APPKEY",
+  //    "host": "HOST",
+  //    "role": "ROLE",
+  //    "roleSecret": "ROLE_SECRET"    
+  //  },
+
+  //////////////////////////////////
+  // Subscriber configuration
+  // Specifies the channel(s) to which the streambot subscribes. 
+  // It also contains the app key, the host, and an optional role configuration.
+  // If your streambot requires role authentication, uncomment the role and roleSecret keys and 
+  // substitute your values from the Developer Portal.
+  //////////////////////////////////
+  "subscriberConfigs": {
+    "main": {
+      "appKey": "APPKEY",
+      "host": "HOST",
+      // "role": "ROLE",
+      // "roleSecret": "ROLE_SECRET",
+      "channels": [
+        {
+          "filter": "SELECT * from `example.in`",
+          "subscriptionId": "mySubscription",
+          "period": 1
+        }
+      ]
+    }
+  },
+
+  ////////////
+  // Other example values
+  //
+  // botInstanceName: 
+  //   A unique name for the streambot instance. 
+  //   When deploying from the Developer Portal, the streambot instance name 
+  //   is the value that you enter in the Name field when creating the streambot instance. 
+  //   When running locally, use any arbitrary string as the streambot instance name.
+  //
+  // botInstanceId:
+  //   When deployed from the Developer Portal, each instance is automatically assigned an instance ID.
+  //   When running locally, specify any arbitrary string here.
+  // 
+  ////////////
+  "botInstanceName": "bot-instance",
+  "botInstanceId": "bot-instance-1",
+  "shouldReportMemoryUsage": false
+}

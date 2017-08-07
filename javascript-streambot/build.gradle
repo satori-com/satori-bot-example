@@ -1,0 +1,33 @@
+buildscript {
+    repositories { jcenter() }
+}
+
+plugins {
+    id 'application'
+    id 'idea'
+}
+
+version = '0.1'
+ext.vars = [
+    botApiVersion:'1.0'
+]
+
+sourceCompatibility = 1.8
+
+repositories {
+        mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.satori', name:'satori-bots-java-core', version: vars.botApiVersion
+    compile 'org.slf4j:slf4j-api:1.7.24'
+    compile group: 'com.satori.streambots', name: 'streambots-execution-framework', version: '1.0.+'
+}
+
+
+task runBot(type: JavaExec) {
+    classpath(sourceSets.main.runtimeClasspath)
+    classpath(sourceSets.main.compileClasspath)
+    main = "com.satori.bots.framework.FrameworkLauncher"
+}
+
