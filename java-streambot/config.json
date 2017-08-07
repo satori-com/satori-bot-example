@@ -28,20 +28,6 @@
   // This serves as the entry point to RTM operations.
   ////////////
   "className": "com.satori.bots.example.MyBot",
-  
-  //////////////////////////////////
-  // Publisher configuration
-  // This is only needed if:
-  // 1) you wish to publish to another combination of appKey/host than specified in subscriberConfigs
-  // or
-  // 2) subscriberConfigs' role does not have PUBLISH permission
-  //////////////////////////////////
-  //  "publisherConfig": {
-  //    "appKey": "APPKEY",
-  //    "host": "HOST",
-  //    "role": "ROLE",
-  //    "roleSecret": "ROLE_SECRET"    
-  //  },
 
   //////////////////////////////////
   // Subscriber configuration
