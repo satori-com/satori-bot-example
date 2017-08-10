@@ -1,28 +1,39 @@
-This howto shows how to develop and test your javascript Satori streambot code.  The sample utilizes a 
-javascript file called `bot.js` and a configuration file called `config.json` to run custom code 
-and setup your streambot, respectively.
+This howto shows how to develop and test your javascript Satori streambot code. The sample utilizes a
+configuration file called `config.json` and a javascript file called `bot.js` to setup your streambot
+and run custom code, respectively.
 
-# Running your javascript streambot locally
-
-In order to run a streambot locally, you'll first need to update the `config.json` file and replace all instances of the words `APPKEY` and `HOST` 
-with your endpoint and appkeys that you received from DevPortal.  Then run
+# Running a Javascript streambot locally
+In order to run a streambot locally, you'll first need to update the `config.json` file and replace
+all instances of the words `APPKEY` and `HOST` with appkey and endpoint that you received from DevPortal, respectively.
+Then run
 ```
 ./gradlew runBot
 ```
+The `bot.js` example is now up and running, listening for incoming messages on a channel called `example.in`.
 
-The `bot.js` example is now up and running and listening for incoming messages on a channel called `example.in`.  
+# Testing your streambot
+Satori provides a tool to send and receive messages, which can be used to test your streambot. To
+install the satori cli utilities, run the following command on your machine: `pip install satori-rtm-cli`.
 
-# Verifying your streambot
-Satori provides a tool to send/receive messages and to test your streambot. To install the satori cli utilities,
-run the following command on your machine: `pip install satori-cli`.
+The `bot.js` example copies traffic from the channel `example.in` to the channel `example.out`. Refer
+`config.json` to see how we configure it.
+
+* Let's start a subscriber client that listens to the `example.out` channel:
+```
+satori-rtm-cli --endpoint=<your_endpoint> --appkey=<your_appkey> subscribe example.out
+```
 
 * Let's now publish to `example.in` channel:
 ```
-echo '{"brand":"batman", "model":"forever", "catchphrase":"ILikePenguins"}' | satori_cli.py --endpoint=<your_endpoint> --appkey=<your_appkey> publish example.in
+echo '{"brand":"batman", "model":"forever", "catchphrase":"ILikePenguins"}' | satori-rtm-cli --endpoint=<your_endpoint> --appkey=<your_appkey> publish example.in
 ```
 
-To verify whether your javascript logic is properly configured to process incoming messages, take a look at your log files.  When running locally, 
-the streambot framework creates a directory called `log` at the root of your project directory.  In that directory, you will
-find log files name `user.log` and `stderr-bot-xx.log`.  The sample `bot.js` echoes the incoming RTM message into the `user.log` file.  Verify that this is indeed being output to this log file.
+The subscriber started above should have received the published data.
 
-Once you are satisfied with the changes to your streambot, you can navigate to DevPortal's Streambots page to `Add a streambot` by drag&drop the `bot.js` within the page.  
+Alternatively, the `bot.js` example also logs the incoming messages. The logs can indicate whether
+the streambot is setup and working properly.
+
+# Uploading your Javascript bot to DevPortal
+Using the provided template streambot, you can make changes to create your own streambot. Once you
+are satisfied with the changes, you can navigate to DevPortal's Streambots page to `Add a streambot`
+by drag&drop the `bot.js` within the page.
