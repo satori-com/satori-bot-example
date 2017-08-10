@@ -4,7 +4,7 @@ and run custom code, respectively.
 
 # Running a Javascript streambot locally
 In order to run a streambot locally, you'll first need to update the `config.json` file and replace
-all instances of the words `APPKEY` and `HOST` with appkey and endpoint that you received from DevPortal, respectively.
+the words `APPKEY` and `HOST` with appkey and endpoint that you received from DevPortal, respectively.
 Then run
 ```
 ./gradlew runBot

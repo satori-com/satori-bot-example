@@ -2,7 +2,7 @@ This howto shows how to develop and test a Satori template streambot.
 
 # Running a Java streambot locally
 
-In order to run a streambot locally, you'll first need to update the `config.json` file and replace all instances of the words `APPKEY` and `HOST` with appkey and endpoint that you received from DevPortal, respectively.
+In order to run a streambot locally, you'll first need to update the `config.json` file and replace the words `APPKEY` and `HOST` with appkey and endpoint that you received from DevPortal, respectively.
 
 ### To start your streambot in your IDE
 Start the `MyBot.java` as a Java application. For example, to run your streambot from within the IntelliJ IDE,
