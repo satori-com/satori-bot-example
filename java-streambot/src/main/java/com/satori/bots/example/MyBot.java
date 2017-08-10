@@ -24,7 +24,7 @@ public class MyBot implements Bot {
   public void onSetup(BotContext botContext) {
 
     final JsonObject object = botContext.getCustomConfiguration().getAsJsonObject();
-    outputChannel = object.get(CONFIG_KEY).getAsString();
+    outputChannel = object.get(CONFIG_KEY) == null ? DEFAULT_OUTPUT_CHANNEL : object.get(CONFIG_KEY).getAsString();
 
     logger.info("Setup done for example bot");
   }
