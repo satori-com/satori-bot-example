@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+java-streambot/.gradle/
+java-streambot/build/
+java-streambot/log/
+javascript-streambot/log/
